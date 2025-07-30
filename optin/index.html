@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiku AI - SMS Opt-In Verbal Consent Script</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --toggle-bg: #e0e0e0;
+            --toggle-circle: #ffffff;
+            --icon-color: #000000;
+            --card-bg: #f5f5f5;
+            --script-bg: #f0f4f8;
+            --highlight-color: #0066cc;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --toggle-bg: #333333;
+            --toggle-circle: #0a0a0a;
+            --icon-color: #ffffff;
+            --card-bg: #1a1a1a;
+            --script-bg: #1e1e1e;
+            --highlight-color: #4db8ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .company-name {
+            color: var(--highlight-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .script-box {
+            background-color: var(--script-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--highlight-color);
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .script-label {
+            font-weight: 700;
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .script-content {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .details-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .details-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .details-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        .follow-up-message {
+            background-color: var(--script-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-style: italic;
+            border: 1px solid var(--toggle-bg);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            background-color: var(--toggle-bg);
+            border-radius: 15px;
+            padding: 3px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        .toggle-circle {
+            width: 24px;
+            height: 24px;
+            background-color: var(--toggle-circle);
+            border-radius: 50%;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        [data-theme="dark"] .toggle-circle {
+            transform: translateX(30px);
+        }
+
+        .sun-icon, .moon-icon {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            transition: opacity 0.3s ease;
+            color: var(--icon-color);
+        }
+
+        .sun-icon {
+            opacity: 1;
+        }
+
+        .moon-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            opacity: 1;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .script-box {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <div class="toggle-circle">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </div>
+    </button>
+
+    <div class="container">
+        <h1>Verbal Consent Script for Toll-Free SMS Opt-In</h1>
+        <p class="company-name">Company: Taiku Inc.</p>
+
+        <section class="section">
+            <h2>1. Overview</h2>
+            <p>This document outlines the official script to be used by Taiku Inc. ("Taiku AI") employees or contractors to obtain verbal consent for SMS messaging.</p>
+            <ul class="details-list">
+                <li><strong>Intended Use:</strong> This script must be read verbatim during a live phone interaction when requesting SMS opt-in permission.</li>
+                <li><strong>Compliance:</strong> All instances of verbal consent must be recorded and securely stored, or accurately logged with a timestamp, to maintain a clear audit trail.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>2. Use Case Details</h2>
+            <ul class="details-list">
+                <li><strong>Use Case Category:</strong> Customer care</li>
+                <li><strong>Message Frequency:</strong> Approximately 2 to 5 messages per month</li>
+                <li><strong>Opt-Out Command:</strong> STOP</li>
+                <li><strong>Help Command:</strong> HELP</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>3. Verbal Consent Script</h2>
+            
+            <div class="script-box">
+                <p class="script-label">(Begin Script)</p>
+                
+                <div class="script-content">
+                    <p><strong>Agent:</strong> "Thank you for choosing Taiku AI. To help you stay up-to-date with your account and receive responses to your customer support inquiries, we would like to be able to send you text messages.</p>
+                    
+                    <p>You may receive approximately 2 to 5 messages per month depending on your inquiries. Please be aware that message and data rates may apply.</p>
+                    
+                    <p>You are always in control of your subscription. You can reply with the word HELP at any time for assistance, or reply with the word STOP to cancel and opt out of all future messages.</p>
+                    
+                    <p>Do we have your consent to send you these informational text messages from Taiku Inc.? Please say 'Yes' to opt-in or 'No' to decline."</p>
+                </div>
+                
+                <div class="script-content">
+                    <p><strong>Customer:</strong> "Yes."</p>
+                </div>
+                
+                <div class="script-content">
+                    <p><strong>Agent:</strong> "Great, thank you. We have noted your consent. We will now send a confirmation text message to your mobile number to confirm your enrollment. Thank you for connecting with Taiku AI!"</p>
+                </div>
+                
+                <p class="script-label">(End Script)</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>4. Required Follow-up Confirmation SMS</h2>
+            <p>Upon receiving verbal consent, the following one-time confirmation message must be sent to the user's phone number immediately.</p>
+            
+            <h3>Message to be sent:</h3>
+            <div class="follow-up-message">
+                "Taiku AI Alerts: You have successfully subscribed to receive account messages. Msg freq varies. Msg & data rates may apply. Reply HELP for help, STOP to cancel."
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
