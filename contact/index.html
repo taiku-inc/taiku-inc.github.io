@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Taiku AI</title>
+    <title>Contact - Taiku AI</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -57,55 +57,30 @@
             font-weight: 700;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
         .company-name {
             color: var(--highlight-color);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .effective-date {
+        .contact-info {
             margin-bottom: 2rem;
             opacity: 0.8;
         }
 
-        .section {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+        .content-wrapper {
+            min-width: 1000px;
+            width: 100%;
         }
 
-        .details-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .details-list li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .details-list li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
+        .email-link {
             color: var(--highlight-color);
-            font-weight: bold;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .email-link:hover {
+            opacity: 0.8;
         }
 
         .theme-toggle {
@@ -171,10 +146,6 @@
             opacity: 1;
         }
 
-        strong {
-            font-weight: 600;
-        }
-
         .back-link {
             color: var(--text-color);
             text-decoration: none;
@@ -196,7 +167,7 @@
         .back-link:hover {
             opacity: 1;
         }
-
+        
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -310,56 +281,12 @@
     </button>
 
     <div class="container">
-        <a href="/" class="back-link"><span class="arrow">←</span> Home</a>
+        <div class="content-wrapper">
+            <a href="/" class="back-link"><span class="arrow">←</span> Home</a>
 
-        <h1>Terms of Service</h1>
-        <p class="company-name">Taiku, Inc.</p>
-        <p class="effective-date">Effective Date: July 17, 2025</p>
-
-        <section class="section">
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing, using, or engaging with the services of Taiku, Inc. ("Taiku AI," "we," or "us")—whether through consultation, proposal, or formal agreement—you acknowledge and agree to be bound by these Terms of Service.</p>
-        </section>
-
-        <section class="section">
-            <h2>2. Scope of Services</h2>
-            <p>Specific services to be provided will be outlined in separate written agreements. These Terms govern all such services, deliverables, and any related advisory or consulting work provided by Taiku AI.</p>
-        </section>
-
-        <section class="section">
-            <h2>3. Fees and Payment</h2>
-            <p>All fees, billing schedules, and payment terms will be specified in the applicable agreement. Late payments may be subject to interest or penalties as detailed in the corresponding agreement.</p>
-        </section>
-
-        <section class="section">
-            <h2>4. Intellectual Property</h2>
-            <p>Taiku AI retains all rights, title, and interest in its pre-existing proprietary technologies, methodologies, content, and tools. Clients are granted only the rights explicitly stated in their respective agreements with Taiku AI.</p>
-        </section>
-
-        <section class="section">
-            <h2>5. Confidentiality</h2>
-            <p>Each party will keep the other's confidential information secure and will not disclose it except as allowed by a separate non-disclosure agreement or as required by law.</p>
-        </section>
-
-        <section class="section">
-            <h2>6. Limitation of Liability</h2>
-            <p>Except as prohibited by law, Taiku AI's total liability for any claim arising under these Terms will not exceed the total fees paid by the client for the specific services at issue.</p>
-        </section>
-
-        <section class="section">
-            <h2>7. Term & Termination</h2>
-            <p>These Terms remain in force until all services are complete or the agreement is terminated in accordance with its own terms. Termination of an agreement does not affect any provisions that by their nature survive.</p>
-        </section>
-
-        <section class="section">
-            <h2>8. Governing Law</h2>
-            <p>These Terms are governed by the laws of the State of Delaware, USA, without regard to conflict-of-law principles.</p>
-        </section>
-
-        <section class="section">
-            <h2>9. Amendments</h2>
-            <p>We may update these Terms from time to time; any changes take effect upon posting at https://taiku.ai/terms/. Continued engagement with Taiku AI after an update constitutes acceptance.</p>
-        </section>
+            <h1>Contact Us</h1>
+            <p class="contact-info">For inquiries, please email us at <a href="mailto:hello@taiku.ai" class="email-link">hello@taiku.ai</a>.</p>
+        </div>
     </div>
 
     <footer>
