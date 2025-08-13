@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Taiku AI</title>
+    <title>About - Taiku AI</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -52,60 +52,88 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
+            padding: 0;
+            padding-top: 4rem;
         }
 
         h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
+            font-size: 1.75rem;
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
             font-weight: 600;
         }
 
         .company-name {
             color: var(--highlight-color);
             font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .effective-date {
             margin-bottom: 2rem;
-            opacity: 0.8;
         }
 
-        .section {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
+        .lead-text {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+            margin-top: 3rem;
+            padding: 0 4rem;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
             margin-bottom: 1.5rem;
         }
 
-        .details-list {
-            list-style: none;
-            padding: 0;
+        .services-section {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            padding-bottom: 5rem;
+            margin: 3rem auto;
+            text-align: left;
+            border-radius: 0;
+            max-width: 800px;
         }
 
-        .details-list li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
+        .services-section h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
         }
 
-        .details-list li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
+        .services-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .services-section a {
             color: var(--highlight-color);
-            font-weight: bold;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .services-section a:hover {
+            opacity: 0.8;
+        }
+
+        .highlight-box {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--highlight-color);
         }
 
         .theme-toggle {
@@ -171,10 +199,6 @@
             opacity: 1;
         }
 
-        strong {
-            font-weight: 600;
-        }
-
         .back-link {
             color: var(--text-color);
             text-decoration: none;
@@ -197,6 +221,69 @@
             opacity: 1;
         }
 
+        .hamburger-menu {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .hamburger-menu:hover {
+            background-color: var(--card-bg);
+        }
+
+        .hamburger-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--text-color);
+        }
+
+        .menu-dropdown {
+            position: fixed;
+            top: 4.5rem;
+            left: 2rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+            min-width: 120px;
+            display: none;
+            z-index: 999;
+        }
+
+        [data-theme="dark"] .menu-dropdown {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-dropdown.show {
+            display: block;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: var(--card-bg);
+        }
+
+        .menu-item.current {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -207,8 +294,39 @@
                 right: 1rem;
             }
 
+            .hamburger-menu {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .menu-dropdown {
+                top: 3.5rem;
+                left: 1rem;
+            }
+
             h1 {
-                font-size: 1.75rem;
+                font-size: 2rem;
+            }
+
+            .lead-text {
+                font-size: 1.1rem;
+            }
+
+            .content-section {
+                padding: 0 2rem;
+            }
+
+            .content-section p {
+                font-size: 1rem;
+            }
+
+            .services-section {
+                margin: 3rem -1rem;
+                padding: 2rem 1rem;
+            }
+
+            .services-section p {
+                font-size: 1rem;
             }
         }
 
@@ -290,6 +408,19 @@
     </style>
 </head>
 <body>
+    <button class="hamburger-menu" id="hamburgerMenu" aria-label="Open menu">
+        <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <div class="menu-dropdown" id="menuDropdown">
+        <a href="/" class="menu-item">Home</a>
+        <a href="/about" class="menu-item current">About</a>
+    </div>
+
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <div class="toggle-circle">
             <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -310,56 +441,12 @@
     </button>
 
     <div class="container">
-        <a href="/" class="back-link"><span class="arrow">←</span> Home</a>
-
-        <h1>Terms of Service</h1>
-        <p class="company-name">Taiku, Inc.</p>
-        <p class="effective-date">Effective Date: July 17, 2025</p>
-
-        <section class="section">
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing, using, or engaging with the services of Taiku, Inc. ("Taiku AI," "we," or "us")—whether through consultation, proposal, or formal agreement—you acknowledge and agree to be bound by these Terms of Service.</p>
-        </section>
-
-        <section class="section">
-            <h2>2. Scope of Services</h2>
-            <p>Specific services to be provided will be outlined in separate written agreements. These Terms govern all such services, deliverables, and any related advisory or consulting work provided by Taiku AI.</p>
-        </section>
-
-        <section class="section">
-            <h2>3. Fees and Payment</h2>
-            <p>All fees, billing schedules, and payment terms will be specified in the applicable agreement. Late payments may be subject to interest or penalties as detailed in the corresponding agreement.</p>
-        </section>
-
-        <section class="section">
-            <h2>4. Intellectual Property</h2>
-            <p>Taiku AI retains all rights, title, and interest in its pre-existing proprietary technologies, methodologies, content, and tools. Clients are granted only the rights explicitly stated in their respective agreements with Taiku AI.</p>
-        </section>
-
-        <section class="section">
-            <h2>5. Confidentiality</h2>
-            <p>Each party will keep the other's confidential information secure and will not disclose it except as allowed by a separate non-disclosure agreement or as required by law.</p>
-        </section>
-
-        <section class="section">
-            <h2>6. Limitation of Liability</h2>
-            <p>Except as prohibited by law, Taiku AI's total liability for any claim arising under these Terms will not exceed the total fees paid by the client for the specific services at issue.</p>
-        </section>
-
-        <section class="section">
-            <h2>7. Term & Termination</h2>
-            <p>These Terms remain in force until all services are complete or the agreement is terminated in accordance with its own terms. Termination of an agreement does not affect any provisions that by their nature survive.</p>
-        </section>
-
-        <section class="section">
-            <h2>8. Governing Law</h2>
-            <p>These Terms are governed by the laws of the State of Delaware, USA, without regard to conflict-of-law principles.</p>
-        </section>
-
-        <section class="section">
-            <h2>9. Amendments</h2>
-            <p>We may update these Terms from time to time; any changes take effect upon posting at https://taiku.ai/terms/. Continued engagement with Taiku AI after an update constitutes acceptance.</p>
-        </section>
+        <h1>About</h1>
+        
+        <div class="services-section">
+            <h2>Our Services</h2>
+            <p>We specialize in designing and building high-quality environments for AI development. <a href="/contact">Contact us</a>.</p>
+        </div>
     </div>
 
     <footer>
@@ -391,6 +478,25 @@
             
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+        });
+
+        // Hamburger menu functionality
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const menuDropdown = document.getElementById('menuDropdown');
+
+        hamburgerMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuDropdown.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', () => {
+            menuDropdown.classList.remove('show');
+        });
+
+        // Prevent menu from closing when clicking inside it
+        menuDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     </script>
 </body>
