@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taiku AI - AI Environments</title>
+    <title>Services - Taiku AI</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -11,7 +11,9 @@
             --toggle-bg: #e0e0e0;
             --toggle-circle: #ffffff;
             --icon-color: #000000;
-            --footer-bg: #f5f5f5;
+            --card-bg: #f5f5f5;
+            --script-bg: #f0f4f8;
+            --highlight-color: #0066cc;
         }
 
         [data-theme="dark"] {
@@ -20,7 +22,9 @@
             --toggle-bg: #333333;
             --toggle-circle: #0a0a0a;
             --icon-color: #ffffff;
-            --footer-bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --script-bg: #1e1e1e;
+            --highlight-color: #4db8ff;
         }
 
         * {
@@ -34,60 +38,97 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow-x: hidden;
         }
 
         .container {
-            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 2rem;
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
             font-weight: 700;
+            padding: 0;
+            padding-top: 4rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            font-weight: 600;
         }
 
-        p {
-            font-size: clamp(1.25rem, 3vw, 1.75rem);
-            font-weight: 400;
-            opacity: 0.8;
-        }
-
-        .learn-more {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.75rem 1.5rem;
-            background: none;
-            border: 2px solid var(--text-color);
-            border-radius: 8px;
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1rem;
+        .lead-text {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
             font-weight: 500;
-            transition: all 0.3s ease;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+            margin-top: 3rem;
+            padding: 0;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .service-box {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .service-box:hover {
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+        }
+
+        .service-box h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .contact-text {
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-text a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-text a:hover {
             opacity: 0.8;
-        }
-
-        .learn-more:hover {
-            opacity: 1;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        [data-theme="dark"] .learn-more:hover {
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
         }
 
         .theme-toggle {
@@ -153,60 +194,6 @@
             opacity: 1;
         }
 
-        footer {
-            width: 100%;
-            padding: 2rem 4rem;
-            background-color: var(--footer-bg);
-            transition: background-color 0.3s ease;
-            margin-top: auto;
-            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
-        }
-        
-        [data-theme="dark"] footer {
-            box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-right p {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin: 0;
-            text-align: right;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-        footer a {
-            color: var(--text-color);
-            text-decoration: none;
-            opacity: 0.7;
-            font-weight: 400;
-            transition: opacity 0.3s ease;
-        }
-
-        footer a:hover {
-            opacity: 1;
-        }
-
-        .separator {
-            opacity: 0.3;
-            font-size: 0.8rem;
-        }
-
         .hamburger-menu {
             position: fixed;
             top: 2rem;
@@ -267,12 +254,14 @@
 
         .menu-item.current {
             font-weight: 600;
-            color: var(--highlight-color);
+            color: var(--text-color);
         }
-
-
-
+        
         @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
             .theme-toggle {
                 top: 1rem;
                 right: 1rem;
@@ -287,7 +276,81 @@
                 top: 3.5rem;
                 left: 1rem;
             }
-            
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .lead-text {
+                font-size: 1.1rem;
+            }
+
+            .content-section {
+                padding: 0 2rem;
+            }
+
+            .content-section p {
+                font-size: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        footer {
+            width: 100%;
+            padding: 2rem 4rem;
+            background-color: var(--card-bg);
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        [data-theme="dark"] footer {
+            box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.7;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 1;
+        }
+
+        .separator {
+            opacity: 0.3;
+            font-size: 0.8rem;
+        }
+
+        .footer-right p {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin: 0;
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
             footer {
                 padding: 2rem;
             }
@@ -309,7 +372,6 @@
             .footer-right p {
                 text-align: center;
             }
-
         }
     </style>
 </head>
@@ -323,9 +385,9 @@
     </button>
 
     <div class="menu-dropdown" id="menuDropdown">
-        <a href="/" class="menu-item current">Home</a>
+        <a href="/" class="menu-item">Home</a>
         <a href="/about" class="menu-item">About</a>
-        <a href="/services" class="menu-item">Services</a>
+        <a href="/services" class="menu-item current">Services</a>
     </div>
 
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -348,11 +410,24 @@
     </button>
 
     <div class="container">
-        <h1>taiku.ai</h1>
-        <p>We're building AI environments</p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="/about" class="learn-more">Learn more</a>
-            <a href="/services" class="learn-more">Our Services</a>
+        <h1>Our Services</h1>
+        
+        <div class="content-section">
+            <p class="lead-text">We work with organizations to design and build high-fidelity AI environments for training and evaluation. Our environments enable AI systems to practice and be evaluated safely and reproducibly across specialized domains.</p>
+            
+            <div class="services-grid">
+                <div class="service-box">
+                    <h3>Software Engineering</h3>
+                </div>
+                <div class="service-box">
+                    <h3>Computer Use</h3>
+                </div>
+                <div class="service-box">
+                    <h3>Cybersecurity</h3>
+                </div>
+            </div>
+            
+            <p class="contact-text">Interested in how we might partner with your organization? Contact us at <a href="mailto:hello@taiku.ai">hello@taiku.ai</a> to discuss your specific requirements.</p>
         </div>
     </div>
 
