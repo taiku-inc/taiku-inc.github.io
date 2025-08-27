@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiku AI - AI Environments</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --toggle-bg: #e0e0e0;
+            --toggle-circle: #ffffff;
+            --icon-color: #000000;
+            --footer-bg: #f5f5f5;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --toggle-bg: #333333;
+            --toggle-circle: #0a0a0a;
+            --icon-color: #ffffff;
+            --footer-bg: #0f0f0f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .learn-more {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: 2px solid var(--text-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .learn-more:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] .learn-more:hover {
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            background-color: var(--toggle-bg);
+            border-radius: 15px;
+            padding: 3px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        .toggle-circle {
+            width: 24px;
+            height: 24px;
+            background-color: var(--toggle-circle);
+            border-radius: 50%;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        [data-theme="dark"] .toggle-circle {
+            transform: translateX(30px);
+        }
+
+        .sun-icon, .moon-icon {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            transition: opacity 0.3s ease;
+            color: var(--icon-color);
+        }
+
+        .sun-icon {
+            opacity: 1;
+        }
+
+        .moon-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            opacity: 1;
+        }
+
+        footer {
+            width: 100%;
+            padding: 2rem 4rem;
+            background-color: var(--footer-bg);
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        [data-theme="dark"] footer {
+            box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-right p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin: 0;
+            text-align: right;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.7;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 1;
+        }
+
+        .separator {
+            opacity: 0.3;
+            font-size: 0.8rem;
+        }
+
+        .hamburger-menu {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .hamburger-menu:hover {
+            background-color: var(--card-bg);
+        }
+
+        .hamburger-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--text-color);
+        }
+
+        .menu-dropdown {
+            position: fixed;
+            top: 4.5rem;
+            left: 2rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+            min-width: 120px;
+            display: none;
+            z-index: 999;
+        }
+
+        [data-theme="dark"] .menu-dropdown {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-dropdown.show {
+            display: block;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: var(--card-bg);
+        }
+
+        .menu-item.current {
+            font-weight: 600;
+            color: var(--highlight-color);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .hamburger-menu {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .menu-dropdown {
+                top: 3.5rem;
+                left: 1rem;
+            }
+            
+            footer {
+                padding: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: center;
+            }
+            
+            .footer-left {
+                order: 2;
+            }
+            
+            .footer-right {
+                order: 1;
+            }
+            
+            .footer-right p {
+                text-align: center;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <button class="hamburger-menu" id="hamburgerMenu" aria-label="Open menu">
+        <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <div class="menu-dropdown" id="menuDropdown">
+        <a href="/" class="menu-item current">Home</a>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <div class="toggle-circle">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </div>
+    </button>
+
+    <div class="container">
+        <h1>taiku.ai</h1>
+        <p>We're building AI environments</p>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <a href="/terms">Terms</a>
+                <span class="separator">·</span>
+                <a href="/privacy">Privacy</a>
+                <span class="separator">·</span>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="footer-right">
+                <p>© Taiku, Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Hamburger menu functionality
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const menuDropdown = document.getElementById('menuDropdown');
+
+        hamburgerMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuDropdown.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', () => {
+            menuDropdown.classList.remove('show');
+        });
+
+        // Prevent menu from closing when clicking inside it
+        menuDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>
